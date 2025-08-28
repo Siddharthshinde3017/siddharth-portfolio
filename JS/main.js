@@ -1,14 +1,40 @@
-// Inject progress bar into all pages
-document.addEventListener("DOMContentLoaded", function() {
-  if (!document.getElementById("progress-bar")) {
-    const progressBar = document.createElement("div");
-    progressBar.id = "progress-bar";
-    document.body.prepend(progressBar);
-  }
-});
+// ===== Progress Bar Animation in Skills Section =====
+const bars = document.querySelectorAll('.progress-bar');
 
-// Navbar shadow + Progress bar scroll
-window.addEventListener('scroll', function () {
+function animateBars() {
+  const triggerBottom = window.innerHeight / 1.1;
+
+  bars.forEach(bar => {
+    const barTop = bar.getBoundingClientRect().top;
+    if (barTop < triggerBottom && bar.style.width === '0%') {
+      const width = bar.getAttribute('data-width');
+      bar.style.width = width;
+      bar.textContent = width;
+    }
+  });
+}
+
+// ===== Scroll Events (Nav Highlight + Navbar Shadow + Progress Bar + Skills Animation) =====
+window.addEventListener("scroll", () => {
+  let sections = document.querySelectorAll("section");
+  let navLinks = document.querySelectorAll(".nav-link");
+  let top = window.scrollY;
+
+  // === Highlight Active Nav Link ===
+  sections.forEach(sec => {
+    let offset = sec.offsetTop - 100;
+    let height = sec.offsetHeight;
+    let id = sec.getAttribute("id");
+
+    if (top >= offset && top < offset + height) {
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        document.querySelector(".nav-link[href*=" + id + "]").classList.add("active");
+      });
+    }
+  });
+
+  // === Navbar Shadow Effect ===
   const navbar = document.querySelector('.navbar');
   if (window.scrollY > 10) {
     navbar.classList.add('scrolled');
@@ -16,42 +42,18 @@ window.addEventListener('scroll', function () {
     navbar.classList.remove('scrolled');
   }
 
-  // Progress bar scroll
+  // === Page Scroll Progress Bar ===
   const progress = document.getElementById("progress-bar");
-  const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const scrolled = (winScroll / height) * 100;
-  progress.style.width = scrolled + "%";
+  if (progress) {
+    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    progress.style.width = scrolled + "%";
+  }
+
+  // === Animate Skill Bars ===
+  animateBars();
 });
 
-// Gallery modal
-const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
-const modalImage = document.getElementById('modalImage');
-const modalTitle = document.getElementById('modalTitle');
-
-// Select all gallery images
-document.querySelectorAll('.gallery-img').forEach(img => {
-  img.addEventListener('click', () => {
-    modalImage.src = img.src;         // Set modal image
-    modalTitle.textContent = img.alt; // Set modal title
-    imageModal.show();
-  });
-});
-
-// EmailJS integration
-(function() {
-  emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
-})();
-
-document.getElementById("contact-form").addEventListener("submit", function(event) {
-  event.preventDefault();
-
-  emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", this)
-  .then(function() {
-      alert("✅ Message sent successfully!");
-      document.getElementById("contact-form").reset();
-  }, function(error) {
-      alert("❌ Failed to send message. Please try again.");
-      console.error("EmailJS error:", error);
-  });
-});
+// ===== Trigger animation when page loads =====
+window.addEventListener("load", animateBars);

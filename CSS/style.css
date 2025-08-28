@@ -2,6 +2,7 @@ html, body {
   background-color: #0d1117;
   margin: 0;
   padding: 0;
+  scrollbar-width: smooth;
 }
 body {
   font-family: 'Poppins', sans-serif;
@@ -291,7 +292,7 @@ footer {
    =============================== */
 
 #gallery {
-  background: #0d1117; /* match body background */
+  /* background: #0d1117; match body background */
   padding: 60px 0;
   color: #c9d1d9; /* same as body text */
   font-family: 'JetBrains Mono', monospace;
