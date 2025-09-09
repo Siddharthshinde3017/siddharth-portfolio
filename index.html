@@ -156,13 +156,13 @@
           <div class="mb-3">
             <label><i class="bi bi-filetype-html"></i> HTML, CSS & Bootstrap</label>
             <div class="progress">
-              <div id="html-css" class="progress-bar bg-success" data-width="90%" style="width: 0%">0%</div>
+              <div id="html-css" class="progress-bar bg-success" data-width="60%" style="width: 0%">0%</div>
             </div>
           </div>
           <div class="mb-3">
             <label><i class="bi bi-braces"></i> JavaScript</label>
             <div class="progress">
-              <div id="js" class="progress-bar bg-warning text-dark" data-width="70%" style="width: 0%">0%</div>
+              <div id="js" class="progress-bar bg-warning text-dark" data-width="40%" style="width: 0%">0%</div>
             </div>
           </div>
           <div class="mb-3">
@@ -185,6 +185,26 @@
         </div>
       </div>
     </div>
+    <!-- Progress Bar Animation  in skills page-->
+  <script>
+    const bars = document.querySelectorAll('.progress-bar');
+
+    function animateBars() {
+      const triggerBottom = window.innerHeight / 1.1;
+
+      bars.forEach(bar => {
+        const barTop = bar.getBoundingClientRect().top;
+        if (barTop < triggerBottom && bar.style.width === '0%') {
+          const width = bar.getAttribute('data-width');
+          bar.style.width = width;
+          bar.textContent = width;
+        }
+      });
+    }
+
+    window.addEventListener('scroll', animateBars);
+    window.addEventListener('load', animateBars);
+  </script>
   </section>
   
 <!-- Gallery Section -->
