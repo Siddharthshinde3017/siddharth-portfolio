@@ -295,21 +295,31 @@
       <p class="text-center mb-5">Have a project in mind or just want to say hello? Fill out the form below!</p>
       <div class="row justify-content-center">
         <div class="col-md-8">
-          <form id="contact-form">
-            <div class="mb-3">
-              <label for="name" class="form-label">Your Name</label>
-              <input type="text" class="form-control" id="name" name="from_name" placeholder="Enter your name" required>
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Your Email</label>
-              <input type="email" class="form-control" id="email" name="reply_to" placeholder="Enter your email" required>
-            </div>
-            <div class="mb-3">
-              <label for="message" class="form-label">Message</label>
-              <textarea class="form-control" id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Send Message</button>
-          </form>
+          <form id="contact-form" action="https://formsubmit.co/siddharthshinde49905@gmail.com" method="POST">
+              <!-- Honeypot (prevents spam) -->
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_template" value="table"> <!-- nice email format -->
+              <input type="hidden" name="_subject" value="New Contact Form Submission from Portfolio">
+              <input type="hidden" name="_next" value="https://siddharth-portfolio-liard.vercel.app/"> <!-- Redirect after submit -->
+
+              <div class="mb-3">
+                <label for="name" class="form-label">Your Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="email" class="form-label">Your Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+              </div>
+              
+              <button type="submit" class="btn btn-primary w-100">Send Message</button>
+</form>
+
         </div>
       </div>
     </div>
