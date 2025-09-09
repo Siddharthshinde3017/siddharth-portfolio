@@ -53,6 +53,15 @@ window.addEventListener("scroll", () => {
 
   // === Animate Skill Bars ===
   animateBars();
+  const bars = document.querySelectorAll('.progress-bar'); 
+  function animateBars() 
+  { const triggerBottom = window.innerHeight / 1.1; 
+    bars.forEach(bar => { const barTop = bar.getBoundingClientRect().top; 
+      if (barTop < triggerBottom && bar.style.width === '0%') { const width = bar.getAttribute('data-width'); 
+        bar.style.width = width; bar.textContent = width; } }); 
+      } 
+      window.addEventListener('scroll', animateBars); 
+      window.addEventListener('load', animateBars);
 });
 
 // ===== Trigger animation when page loads =====
